@@ -4,7 +4,10 @@ const Patient = require("../model/Patient");
 const Report = require("../model/Reports");
 const Doctor = require("../model/Doctor");
 const { checkToken, verifier } = require("./Auth/Auth");
-
+patientRouter.get("/", async (req, res) => {
+  const patient = await Patient.find();
+  res.json(patient);
+});
 patientRouter.post("/register", checkToken, async (req, res) => {
   const { status, id } = verifier(req.token);
   if (status) {
@@ -19,6 +22,11 @@ patientRouter.post("/register", checkToken, async (req, res) => {
           name: req.body.name,
           phoneNumber: req.body.number,
           consultedTo: id,
+        });
+        await Doctor.findByIdAndUpdate(id, {
+          $push: {
+            treatedTo: { name: req.body.name, phoneNumber: req.body.number },
+          },
         });
         const patient = await newPatient.save();
         res.status(200).json("registered the patient");

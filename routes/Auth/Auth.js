@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const secretKey = "jrowejQWQoo12$"; // add your own secret key
+const secretKey = process.env.SECRET; // add your own secret key
 
 const checkToken = (req, res, next) => {
   const headers = req.headers["authorization"];

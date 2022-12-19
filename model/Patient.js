@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const uuid = require("uuid");
 
 const patientSchema = new mongoose.Schema({
   name: {
@@ -11,7 +10,8 @@ const patientSchema = new mongoose.Schema({
     required: true,
   },
   consultedTo: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Doctor",
     required: true,
   },
 });

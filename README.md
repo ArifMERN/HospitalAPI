@@ -15,7 +15,7 @@ To start with just start with
  # npm start
 
 ## routes and using them
-#Doctor routes
+# Doctor routes
 1. Register:
    /doctor/register
    To register have to provide the details like name, email and password
